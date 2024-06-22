@@ -1,0 +1,37 @@
+.body {
+    background-color: #dbf9e5;
+}
+
+.center {
+    display: flex;
+    padding: 5px;
+    justify-content: space-evenly;
+}
+
+#topDivActiveTask {
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+}
+
+#add_task {
+    display: flex;
+    justify-content: center;
+}
+
+#tasksHolder {
+    margin-top: 2%;
+    display: grid;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .navbar-brand.abs
+        {
+            position: absolute;
+            width: auto;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+    }

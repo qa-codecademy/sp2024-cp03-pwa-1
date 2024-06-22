@@ -37,11 +37,9 @@ addTaskButton.addEventListener('click', function () {
                     tasks.forEach(element => {
                         ids.push(element.id)
                     });
-                    console.log(ids)
                     let maxValue = Math.max(...ids);
                     assignedId = maxValue + 1
                     ids.push(assignedId)
-                    console.log(ids)
                 }
                 taskTimeInMinutes = (pomodoros * 25).toFixed(2) //convert to minutes
                 let taskObject = { 'id': assignedId, 'nameOfTask': taskNameBox.value, 'time': taskTimeInMinutes, 'remainingTime': taskTimeInMinutes * 60, 'elapsedTime': 0, 'totalPomodoros': pomodoros, 'remainingPomodoros': 0 }
@@ -67,13 +65,11 @@ document.addEventListener('click', function (e) {
     let tasks = JSON.parse(itemsFromStirage)
     if (e.target.classList.contains('removeButton')) {
         let removeId = tasks.findIndex(object => { return object.id == e.target.parentNode.id })
-        console.log('Id to remove is', removeId)
 
         if (confirm('Are you sure that you want to remove the task?')) {
             tasks.splice(removeId, 1)
             e.target.remove()
             localStorage.setItem("tasks", JSON.stringify(tasks));
-            console.log(`There are now ${tasks.length} objects in the Array.`)
             for (i = 0; i < tasks.length; i++) {
                 console.log(`Remainng task is: ${tasks[i].nameOfTask} with time ${tasks[i].time} with id: ${tasks[i].id}`)
             }
@@ -128,8 +124,6 @@ document.addEventListener('click', function (e) {
     // timeTaskIsActive = 0
     if (topDivActiveTask.innerText !== 'No Active Task') {
         if (e.target.id === 'startStopButton') {
-            console.log(`Tracking startStopButton inner text ${startStopButton.innerText}`)
-
             if (e.target.innerText === 'Start') {
                 addTaskButton.hidden = true
                 myInterval = setInterval(trackAndUpdateTimer, 1000)
@@ -145,7 +139,6 @@ document.addEventListener('click', function (e) {
                 let getActiveTaskIndex = tasks.findIndex(object => { return object.id == currentActiveTaskId })
                 let activeTask = tasks[getActiveTaskIndex] //Get specific task object
                 activeTaskIdPassed = activeTask
-                console.log('current elapsed time ' + currentTaskElapsedTime)
                 activeTask.remainingTime = activeTask.remainingTime - currentTaskElapsedTime
                 localStorage.setItem("tasks", JSON.stringify(tasks))
                 currentTaskElapsedTime = 0
@@ -157,31 +150,41 @@ document.addEventListener('click', function (e) {
 
 function trackAndUpdateTimer() {
     currentTaskElapsedTime++
-    console.log(`Tracking startStopButton inner text ${startStopButton.innerText}`)
     currentTime = timer.innerHTML
     prints = currentTime.split(':')
     minutes = prints[0]
     seconds = prints[1]
-    console.log(seconds)
     if (minutes == 0 && seconds == 0) {
         clearInterval(myInterval)
 
         itemsFromStorage = localStorage.getItem('tasks')
         tasks = JSON.parse(itemsFromStorage)
-        console.log(tasks)
-        console.log(currentActiveTaskId)
         let getActiveTaskIndex = tasks.findIndex(object => { return object.id == currentActiveTaskId })
-        console.log(tasks[getActiveTaskIndex])
-        console.log(tasks[getActiveTaskIndex].nameOfTask)
-        tasks.splice(getActiveTaskIndex, 1)
+        tasks[getActiveTaskIndex].remainingTime = tasks[getActiveTaskIndex].remainingTime - currentTaskElapsedTime
 
-        alert('Task finished')
-        startStopButton.innerText = 'Start'
-        timer.innerHTML = '25:00'
-        topDivActiveTask.innerText = 'No Active Task'
-        addTaskButton.hidden = false
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-        showTasks()
+        currentTaskElapsedTime = 0
+        //
+        if (tasks[getActiveTaskIndex].remainingTime > 0) {
+            alert('Pomodoro finished. Take a break :-)')
+            startStopButton.innerText = 'Start'
+            timer.innerHTML = '25:00'
+            topDivActiveTask.innerText = 'No Active Task'
+            addTaskButton.hidden = false
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            showTasks()
+
+        } else if(tasks[getActiveTaskIndex].remainingTime <= 0) {
+            tasks.splice(getActiveTaskIndex, 1)
+
+            alert('Task focus is finished. Take a break :-)')
+            startStopButton.innerText = 'Start'
+            timer.innerHTML = '25:00'
+            topDivActiveTask.innerText = 'No Active Task'
+            addTaskButton.hidden = false
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            showTasks()
+        }
+        //
     }
     seconds--
     if (seconds >= 0) {
@@ -193,7 +196,6 @@ function trackAndUpdateTimer() {
     } else {
         if (minutes > 0) {
             minutes--
-            console.log(minutes)
             seconds = 59
             if (seconds < 10) {
                 timer.innerHTML = `${minutes}:0${seconds}`

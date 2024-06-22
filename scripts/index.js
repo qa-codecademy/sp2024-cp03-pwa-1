@@ -1,3 +1,4 @@
+
 let currentTaskElapsedTime = 0
 let activeTaskIdPassed
 let topDivActiveTask = document.getElementById('topDivActiveTask')
@@ -13,7 +14,7 @@ let beforeRefreshingPage = (e) => {
     e.preventDefault();
 };
 
-window.addEventListener("beforeunload", beforeRefreshingPage);
+window.addEventListener("beforeunload", beforeRefreshingPage)
 
 showTasks()
 //Create task
@@ -44,6 +45,7 @@ addTaskButton.addEventListener('click', function () {
                 }
                 taskTimeInMinutes = (pomodoros * 25).toFixed(2) //convert to minutes
                 let taskObject = { 'id': assignedId, 'nameOfTask': taskNameBox.value, 'time': taskTimeInMinutes, 'remainingTime': taskTimeInMinutes * 60, 'elapsedTime': 0, 'totalPomodoros': pomodoros, 'remainingPomodoros': 0 }
+
                 tasks.push(taskObject)
                 taskTimeBox.value = ''
                 taskNameBox.value = ''
@@ -57,6 +59,8 @@ addTaskButton.addEventListener('click', function () {
         alert('Please enter title')
     }
 })
+
+
 //Remove task
 document.addEventListener('click', function (e) {
     let itemsFromStirage = localStorage.getItem('tasks') //string
@@ -199,6 +203,7 @@ function trackAndUpdateTimer() {
         }
     }
 }
+
 
 
 function showTasks() {

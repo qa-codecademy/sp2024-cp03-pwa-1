@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
     <link rel="stylesheet" href="/styles/timer.css" type="text/css" />
     <link rel="stylesheet" href="/styles/index.css" type="text/css" />
+    <link rel="stylesheet" href="./styles/card.css">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,7 +19,6 @@
     <div id="navBarDiv">
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
-          <a class="navbar-brand" href="#">Productivity</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -53,36 +53,38 @@
         </div>
       </nav>
     </div>
-    <div>
-      <h3 id="topDivOptions">Pomodoro</h3>
-      </br>
+    <div id="topContent">
+      <h3 id="topDivOptions">🗹 Pomodoro</h3>
       <h2 id="topDivActiveTask">No Active Task</h2>
-      </br>
       <p id="timer">25:00</p>
-    </div>
-    <div id="startStopTimerButton">
       <button id="startStopButton" class="btn btn-outline-secondary">
         Start
       </button>
     </div>
-    <br>
     <div id="add_task">
       <div>
-        <input type="text" id="taskName" title="taskName" placeholder="Enter Task Name">
+        <input
+          type="text"
+          id="taskName"
+          title="taskName"
+          placeholder="Enter Task Name"
+        />
       </div>
-      <br>
+      <br />
       <div>
-        <input type="text", id="taskTime" title="taskTime" placeholder="Pomodoros">
+        <input
+          type="text"
+          id="taskTime"
+          title="taskTime"
+          placeholder="Pomodoros"
+        />
       </div>
-      <br>            
+      <br />
       <button id="addTaskButton" class="btn btn-secondary btn-sm">Add Task</button>
-  </div>
-  <div id="tasksHolder">
-    <div id="taskBox">
-    
     </div>
-  </div>
-
+    <div id="tasksHolder">
+      <div id="taskBox"></div>
+    </div>
     <script src="scripts/index.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

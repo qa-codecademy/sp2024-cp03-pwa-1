@@ -96,12 +96,12 @@ document.addEventListener('click', function (e) {
         let itemsFromStorage = localStorage.getItem('tasks');
         let tasks = JSON.parse(itemsFromStorage) || [];
 
-        let activeTaskId = parseInt(e.target.parentNode.id);
+        let activeTaskId = parseInt(e.target.parentNode.parentNode.id);
         if (!isNaN(activeTaskId)) {
             let activeTask = tasks.find(task => task.id === activeTaskId);
 
             if (activeTask) {
-                topDivActiveTask.innerHTML = activeTask.nameOfTask;
+                topDivActiveTask.innerHTML = activeTask.nameOfTask; // Ажурирање на името на активната задача
                 currentActiveTaskId = activeTask.id;
                 timer.innerHTML = '25:00'; 
 

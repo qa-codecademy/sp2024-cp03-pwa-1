@@ -101,7 +101,7 @@ document.addEventListener('click', function (e) {
             let activeTask = tasks.find(task => task.id === activeTaskId);
 
             if (activeTask) {
-                topDivActiveTask.innerHTML = activeTask.nameOfTask; 
+                topDivActiveTask.innerHTML = activeTask.nameOfTask; //  
                 currentActiveTaskId = activeTask.id;
                 timer.innerHTML = '25:00'; 
 

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/timer.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/index.css" type="text/css" />
+    <link rel="stylesheet" href="./styles/card.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <title>Pomodoro</title>
+  </head>
+  <body class="body">
+    <div id="navBarDiv">
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarsExample11"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse text-center" id="navbarsExample11">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a id="homeNavButton" class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a id="hoToBeProdNavButton" class="nav-link" href="/How_To_Be_Productiove/how_to_be_productive.html">How to be productive</a>
+              </li>
+              <li class="nav-item">
+                <a id="statisticsNavButton" class="nav-link" href="/Statistics/statistics.html"
+                  >Statistics</a
+                >
+              </li>
+              <li class="nav-item">
+                <a id="calendarNavButton" class="nav-link" href="/Calendar/calendar.html">Calendar</a>
+              </li>
+              <li class="nav-item">
+                <a id="reminderNavButton" class="nav-link" href="/Reminders/reminders.html">Reminders</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div id="topContent">
+      <h3 id="topDivOptions">🗹 Pomodoro</h3>
+      <h2 id="topDivActiveTask">No Active Task</h2>
+      <p id="timer">25:00</p>
+      <button id="startStopButton" class="btn btn-outline-secondary">
+        Start
+      </button>
+    </div>
+    <div id="add_task">
+      <div>
+        <input
+          type="text"
+          id="taskName"
+          title="taskName"
+          placeholder="Enter Task Name"
+        />
+      </div>
+      <br />
+      <div>
+        <input
+          type="text"
+          id="taskTime"
+          title="taskTime"
+          placeholder="Pomodoros"
+        />
+      </div>
+      <br />
+      <button id="addTaskButton" class="btn btn-secondary btn-sm">Add Task</button>
+    </div>
+    <div id="tasksHolder">
+      <div id="taskBox"></div>
+    </div>
+    <script src="scripts/index.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

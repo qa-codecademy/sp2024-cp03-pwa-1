@@ -1,0 +1,46 @@
+.body {
+    background-color: #ff4a4a;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.center {
+    display: flex;
+    padding: 10px;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#topDivActiveTask {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#add_task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tasksHolder {
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .navbar-brand.abs
+        {
+            position: absolute;
+            width: auto;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+    }

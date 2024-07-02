@@ -1,0 +1,76 @@
+div.card {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-color: #d43d3d; 
+    color: #fff; 
+    text-align: center;
+}
+
+div.card:hover {
+    transform: translateY(-5px);
+}
+
+div.card-body {
+    padding: 20px; 
+}
+
+div.card-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+ul.list-group {
+    background-color: rgba(255, 255, 255, 0.1); 
+    border: none;
+}
+
+div.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.btn {
+    margin-right: 10px;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer; 
+}
+
+.set_timer {
+    background-color: #fff;
+    color: #333;
+    border: none;
+}
+
+.set_timer:hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.removeButton {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+}
+
+.removeButton:hover {
+    background-color: #c82333;
+}
+
+input.importantCheckbox {
+    margin-right: 5px;
+}
+
+label[for="importantCheckbox"] {
+    color: #333;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+} 
+

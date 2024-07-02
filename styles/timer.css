@@ -1,0 +1,91 @@
+#topContent {
+  text-align: center;
+  background-color: #d43d3d;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+#topDivOptions {
+  font-size: 24px;
+  color: #fff;
+  padding: 10px 10px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+#topDivActiveTask {
+  font-size: 24px;
+  color: #fff;
+  margin-top: 10px;
+}
+
+#timer {
+  font-size: 100px;
+  color: #fff;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#startStopButton {
+  margin-top: 20px;
+  background-color: #fff;
+  color: #333;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 8px;
+  transition: transform 0.3 ease;
+  cursor: pointer;
+}
+
+#startStopButton:hover {
+  background-color: #e0e0e0;
+}
+
+#add_task {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#taskName {
+  width: 250px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#taskTime {
+  width: 250px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#addTaskButton {
+  margin-top: 10px;
+  font-size: 14px;
+  padding: 10px 30px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 200px;
+  height: 50px;
+}
+
+#addTaskButton:hover {
+  background-color: #555;
+}
+
+#tasksHolder {
+  margin-top: 20px;
+  text-align: center;
+}

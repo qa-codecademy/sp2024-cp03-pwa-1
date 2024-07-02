@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/navbar.css" type="text/css">
+    <link rel="stylesheet" href="./src/calendarCSS.css" type="text/css">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    
     <title>Calendar</title>
 </head>
 <body>
@@ -51,9 +53,41 @@
           </div>
         </nav>
       </div>
-    <div id="titleDiv">
+      <br>
+    <div id="titleDiv" style="text-align: center;">
         <h1>Calendar</h1>
     </div>
+    <br>
+    <br>
+    <div class="calendar-container">
+      <div class="calendar-header">
+          <button id="prevMonth">&lt;</button>
+          <h2 id="monthYear"></h2>
+          <button id="nextMonth">&gt;</button>
+      </div>
+      <table class="calendar" id="calendarTable">
+          <thead>
+              <tr>
+                  <th>Sun</th>
+                  <th>Mon</th>
+                  <th>Tue</th>
+                  <th>Wed</th>
+                  <th>Thu</th>
+                  <th>Fri</th>
+                  <th>Sat</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Calendar days will be dynamically generated here -->
+          </tbody>
+      </table>
+      <div class="task-input-container">
+          <input type="text" id="taskInput" placeholder="Add a task">
+          <button id="addTaskBtn">Add</button>
+      </div>
+  </div>
+
+  <script src="./src/calendarJS.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

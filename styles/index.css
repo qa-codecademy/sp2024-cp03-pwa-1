@@ -1,5 +1,5 @@
-body {
-    background-color: #caeccf;
+.body {
+    background-color: #dbf9e5;
 }
 
 .center {
@@ -8,16 +8,16 @@ body {
     justify-content: space-evenly;
 }
 
+#topDivActiveTask {
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+}
+
 #add_task {
     display: flex;
     justify-content: center;
 }
-
-/* div[Id^= 'taskId']{
-    border: solid 3px;
-    border-radius: 3%;
-    width: 20%;
-} */
 
 #tasksHolder {
     margin-top: 2%;

@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/navbar.css" type="text/css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="./src/statisticsCSS.css" type="text/css">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <title>Statistics</title>
+    <title>Productivity Statistics</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div id="navBarDiv">
@@ -51,7 +55,66 @@
         </nav>
       </div>
     <div id="titleDiv">
-        <h1>Statistics</h1>
+        <h1 align="center">Statistics</h1>
+        <br>
+        <br>
+        <div class="statistics-tab">
+          <header>
+              <h1>Productivity Statistics</h1>
+          </header>
+          <div class="filters">
+              <label for="date-range">Date Range:</label>
+              <select id="date-range">
+                  <option value="last7days">Last 7 Days</option>
+                  <option value="last30days">Last 30 Days</option>
+                  <option value="all">All Time</option>
+              </select>
+  
+              <label for="category">Category:</label>
+              <select id="category">
+                  <option value="all">All</option>
+                  <option value="work">Work</option>
+                  <option value="personal">Personal</option>
+              </select>
+          </div>
+  
+          <div class="overview-cards">
+              <div class="overview-card">
+                  <h3>Total Tasks Completed</h3>
+                  <p id="total-tasks">0</p>
+              </div>
+              <div class="overview-card">
+                  <h3>Average Completion Time</h3>
+                  <p id="average-time">0 hrs</p>
+              </div>
+              <!-- Add more cards as needed -->
+          </div>
+  
+          <div class="charts">
+              <canvas id="tasksOverTimeChart"></canvas>
+              <canvas id="tasksByCategoryChart"></canvas>
+              <canvas id="completionRateChart"></canvas>
+          </div>
+  
+          <div class="task-list">
+              <h2>Recent Tasks Completed</h2>
+              <table id="taskTable">
+                  <thead>
+                      <tr>
+                          <th>Task</th>
+                          <th>Category</th>
+                          <th>Status</th>
+                          <th>Completion Time</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <!-- Task rows will be populated here by JavaScript -->
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  
+      <script src="./src/script.js"></script>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

@@ -48,37 +48,41 @@
 }
 
 #add_task {
-  text-align: center;
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
+
 
 #taskName {
   width: 250px;
-  padding: 8px;
+  padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 
 #taskTime {
   width: 250px;
-  padding: 8px;
+  padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 
 #addTaskButton {
-  margin-top: 10px;
-  font-size: 14px;
-  padding: 10px 30px;
+  font-size: 16px;
+  padding: 12px 30px;
   background-color: #333;
   color: #fff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   width: 200px;
-  height: 50px;
+  height: 48px;
 }
 
 #addTaskButton:hover {

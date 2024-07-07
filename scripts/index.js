@@ -1,4 +1,3 @@
-
 let currentTaskElapsedTime = 0;
 let topDivActiveTask = document.getElementById('topDivActiveTask');
 let timer = document.getElementById('timer');
@@ -8,6 +7,8 @@ let taskNameBox = document.getElementById('taskName');
 let taskTimeBox = document.getElementById('taskTime');
 let taskBox = document.getElementById('taskBox');
 let currentActiveTaskId = -1;
+let timerInterval;
+let currentTimeInSeconds = 1500;
 
 let beforeRefreshingPage = (e) => {
     e.preventDefault();
@@ -29,45 +30,50 @@ addTaskButton.addEventListener('click', function () {
         return;
     }
 
-    if (taskNameBox.value !== '') {
-        if (!isNaN(taskTimeBox.value) && taskTimeBox.value !== '') {
-            let pomodoros = parseFloat(taskTimeBox.value);
-            
-            if (tasks.length === 0) {
-                assignedId = 1;
-                ids.push(assignedId);
-            } else {
-                tasks.forEach(element => {
-                    ids.push(element.id);
-                });
-                let maxValue = Math.max(...ids);
-                assignedId = maxValue + 1;
-                ids.push(assignedId);
-            }
-    
-            taskTimeInMinutes = (pomodoros * 25).toFixed(2); // convert to minutes
-            let taskObject = {
-                'id': assignedId,
-                'nameOfTask': taskNameBox.value,
-                'time': taskTimeInMinutes,
-                'remainingTime': taskTimeInMinutes * 60,
-                'elapsedTime': 0,
-                'totalPomodoros': pomodoros,
-                'remainingPomodoros': 0
-            };
-            tasks.push(taskObject);
-            taskTimeBox.value = '';
-            taskNameBox.value = '';
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-            showTasks();
-            if (tasks.length >= 5) {
-                addTaskButton.disabled = true;
-            }
-        } else {
-            alert('Please enter a valid number for Pomodoros.');
-        }
-    } else {
-        alert('Please enter a title.');
+    let taskName = taskNameBox.value.trim();
+    if (taskName === '') {
+        alert('Task name should not be empty.');
+        return;
+    }
+
+    let pomodorosInput = taskTimeBox.value.trim();
+    if (pomodorosInput === '') {
+        alert('Pomodoros input should not be empty.');
+        return;
+    }
+    if (!/^\d*\.?\d*$/.test(pomodorosInput)) {
+        alert('Pomodoros input should only contain numbers.');
+        return;
+    }
+    let pomodoros = parseFloat(pomodorosInput);
+    if (pomodoros <= 0) {
+        alert('Pomodoros input should be a positive number.');
+        return;
+    }
+
+    let assignedId = (ids.length === 0) ? 1 : Math.max(...ids) + 1;
+    let taskTimeInMinutes = (pomodoros * 25).toFixed(2);
+    let taskObject = {
+        'id': assignedId,
+        'name': taskNameBox.value.trim(),
+        'time': taskTimeInMinutes,
+        'remainingTime': taskTimeInMinutes * 60,
+        'elapsedTime': 0,
+        'totalPomodoros': pomodoros,
+        'remainingPomodoros': 0,
+        'completionTime': "2024-06-03 16:00",
+        'status': "deferred",
+        'category': "work"
+    };
+
+    tasks.push(taskObject);
+    taskTimeBox.value = '';
+    taskNameBox.value = '';
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    showTasks();
+
+    if (tasks.length >= 5) {
+        addTaskButton.disabled = true;
     }
 });
 
@@ -101,11 +107,11 @@ document.addEventListener('click', function (e) {
             let activeTask = tasks.find(task => task.id === activeTaskId);
 
             if (activeTask) {
-                topDivActiveTask.innerHTML = activeTask.nameOfTask; //Updating the name of the active task  
+                topDivActiveTask.style.display = 'block';
+                topDivActiveTask.innerHTML = activeTask.name;
                 currentActiveTaskId = activeTask.id;
-                timer.innerHTML = '25:00'; 
-
-                showTasks();
+                activeTask.remainingTime = currentTimeInSeconds;
+                localStorage.setItem('tasks', JSON.stringify(tasks));
             }
         }
     }
@@ -114,86 +120,58 @@ document.addEventListener('click', function (e) {
 // Start/Pause timer
 startStopButton.addEventListener('click', function (e) {
     if (e.target.innerText === 'Start') {
-        let currentTimeOnTimer = timer.innerHTML;
-        let [minutes, seconds] = currentTimeOnTimer.split(':').map(part => parseInt(part, 10));
+        localStorage.getItem("tasks")
+        e.target.innerText = 'Pause';
+        timerInterval = setInterval(trackAndUpdateTimer, 1000);
 
-        if (minutes === 25 && seconds === 0) {
-            e.target.innerText = 'Pause';
-            addTaskButton.hidden = true;
-            myInterval = setInterval(trackAndUpdateTimer, 1000);
-        } else {
-            alert('Please set the timer before starting.');
+        if (currentActiveTaskId === -1) {
+            topDivActiveTask.style.display = 'none';
         }
     } else if (e.target.innerText === 'Pause') {
         e.target.innerText = 'Start';
-        addTaskButton.hidden = false;
-        clearInterval(myInterval);
+        clearInterval(timerInterval);
+
+        if (currentActiveTaskId === -1) {
+            topDivActiveTask.style.display = 'block';
+        }
     }
 });
 
 function trackAndUpdateTimer() {
-    currentTaskElapsedTime++;
-    currentTime = timer.innerHTML;
-    prints = currentTime.split(':');
-    minutes = prints[0];
-    seconds = prints[1];
-    if (minutes == 0 && seconds == 0) {
-        clearInterval(myInterval);
+    let currentTime = timer.innerHTML;
+    let [minutes, seconds] = currentTime.split(':').map(part => parseInt(part, 10));
 
-        let itemsFromStorage = localStorage.getItem('tasks');
-        let tasks = JSON.parse(itemsFromStorage) || [];
-        let getActiveTaskIndex = tasks.findIndex(object => { return object.id == currentActiveTaskId });
-
-        if (getActiveTaskIndex !== -1) {
-            tasks[getActiveTaskIndex].remainingTime -= currentTaskElapsedTime;
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-
-            if (tasks[getActiveTaskIndex].remainingTime > 0) {
-                alert('Pomodoro finished. Take a break :-)');
-                startStopButton.innerText = 'Start';
-                timer.innerHTML = '25:00';
-                topDivActiveTask.innerText = 'No Active Task';
-                addTaskButton.hidden = false;
-            } else {
-                tasks.splice(getActiveTaskIndex, 1);
-                alert('Task focus is finished. Take a break :-)');
-                startStopButton.innerText = 'Start';
-                timer.innerHTML = '25:00';
-                topDivActiveTask.innerText = 'No Active Task';
-                addTaskButton.hidden = false;
-                localStorage.setItem("tasks", JSON.stringify(tasks));
-            }
-        }
-
-        currentTaskElapsedTime = 0;
-        showTasks();
+    if (minutes === 0 && seconds === 0) {
+        clearInterval(timerInterval);
+        alert('Pomodoro finished. Take a break :-)');
+        startStopButton.innerText = 'Start';
+        timer.innerHTML = '25:00';
+        currentTimeInSeconds = 1500;
+        return;
     }
 
     seconds--;
-    if (seconds >= 0) {
-        timer.innerHTML = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-    } else {
-        if (minutes > 0) {
-            minutes--;
-            seconds = 59;
-            timer.innerHTML = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-        }
+    if (seconds < 0) {
+        seconds = 59;
+        minutes--;
     }
-}
 
+    currentTimeInSeconds = minutes * 60 + seconds;
+    timer.innerHTML = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+}
 
 function showTasks() {
     let itemsFromStorage = localStorage.getItem('tasks');
     let tasks = JSON.parse(itemsFromStorage) || [];
     taskBox.innerHTML = '';
-    
+
     if (tasks.length > 0) {
         tasks.forEach(task => {
-            let importantCheckbox = task.important ? 'checked' : ''; 
+            let importantCheckbox = task.important ? 'checked' : '';
             taskBox.innerHTML += `
                 <div id="${task.id}" class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">${task.nameOfTask}</h5>
+                        <h5 class="card-title">${task.name}</h5>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">${task.time} min</li>
@@ -214,23 +192,17 @@ function showTasks() {
     } else {
         addTaskButton.disabled = false;
     }
-    
+
     let importantCheckboxes = document.querySelectorAll('.importantCheckbox');
     importantCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('click', function() {
+        checkbox.addEventListener('click', function () {
             let taskId = parseInt(checkbox.getAttribute('data-taskid'));
             let taskToUpdate = tasks.find(task => task.id === taskId);
             if (taskToUpdate) {
                 taskToUpdate.important = checkbox.checked;
                 localStorage.setItem('tasks', JSON.stringify(tasks));
-                showTasks(); 
+                showTasks();
             }
         });
     });
 }
-
-
-
-
-
-

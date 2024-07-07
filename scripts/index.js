@@ -1,3 +1,4 @@
+
 let currentTaskElapsedTime = 0;
 let topDivActiveTask = document.getElementById('topDivActiveTask');
 let timer = document.getElementById('timer');
@@ -206,3 +207,9 @@ function showTasks() {
         });
     });
 }
+
+
+
+
+
+

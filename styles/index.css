@@ -15,7 +15,7 @@
 }
 
 #add_task {
-    display: flex;
+    display: grid;
     justify-content: center;
 }
 

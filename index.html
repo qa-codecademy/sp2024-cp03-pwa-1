@@ -45,8 +45,8 @@
     </nav>
   </div>
   <div id="homeDiv">
-    <h3 id="topDivOptions" align="center">Pomodoro</h3>
-    <p id="timer" align="center">25:00</p>
+    <h3 id="topDivOptions" text-align="center">Pomodoro</h3>
+    <p id="timer" text-align="center">25:00</p>
   </div>
   <div id="startStopTimerButton">
     <button id="startStopTimerButton" class="btn btn-outline-secondary">
@@ -56,11 +56,15 @@
   <br>
   <div id="add_task">
     <div>
-      <input type="text" id="taskName" title="taskName" placeholder="Enter Task Name">
+      <input type="text" id="taskName" title="taskName" placeholder="Enter Task Name" required>
     </div>
     <br>
     <div>
-      <input type="text" , id="taskTime" title="taskTime" placeholder="Estimated Time">
+      <input type="number" , id="taskTime" title="taskTime" placeholder="Estimated Time" required>
+    </div>
+    <br>
+    <div>
+      <input type="date" id="taskDate" title="taskDate" placeholder="Enter task date" required>
     </div>
     <br>
     <button id="addTaskButton" class="btn btn-secondary btn-sm">Add Task</button>

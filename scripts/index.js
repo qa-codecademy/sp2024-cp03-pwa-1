@@ -7,6 +7,7 @@ let addTaskButton = document.getElementById('addTaskButton')
 let startStopButton = document.getElementById('startStopButton')
 let taskNameBox = document.getElementById('taskName')
 let taskTimeBox = document.getElementById('taskTime')
+let taskDateBox = document.getElementById('taskDate')
 let taskBox = document.getElementById('taskBox')
 let currentActiveTaskId = -1
 
